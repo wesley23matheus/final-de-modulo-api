@@ -42,13 +42,13 @@ app.post('/login', (req, res) => {
 
 // Rota para criar um novo recado
 app.post('/recados', (req, res) => {
-  const { titulo, descricao } = req.body;
+  const { titulo, descricao, usuarioId } = req.body;
 
   const recado = {
     id: recados.length + 1,
     titulo,
     descricao,
-    usuarioId: req.body.usuarioId,
+    usuarioId,
   };
   recados.push(recado);
 
@@ -63,9 +63,44 @@ app.get('/recados/:usuarioId', (req, res) => {
   res.json(recadosDoUsuario);
 });
 
+// Rota para atualizar um recado
+app.put('/recados/:id', (req, res) => {
+  const recadoId = parseInt(req.params.id);
+  const { titulo, descricao } = req.body;
+
+  const recado = recados.find((r) => r.id === recadoId);
+  if (!recado) {
+    res.status(404).json({ error: 'Recado não encontrado' });
+    return;
+  }
+
+  recado.titulo = titulo;
+  recado.descricao = descricao;
+
+  res.json({ message: 'Recado atualizado com sucesso' });
+});
+
+// Rota para excluir um recado
+app.delete('/recados/:id', (req, res) => {
+  const recadoId = parseInt(req.params.id);
+
+  const recadoIndex = recados.findIndex((r) => r.id === recadoId);
+  if (recadoIndex === -1) {
+    res.status(404).json({ error: 'Recado não encontrado' });
+    return;
+  }
+
+  recados.splice(recadoIndex, 1);
+
+  res.json({ message: 'Recado excluído com sucesso' });
+});
+
 app.listen(3000, () => {
+ 
   console.log('Deu tudo certo');
   console.log('Servidor rodando na porta 3000');
+
 });
+
 
 
