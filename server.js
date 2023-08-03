@@ -1,8 +1,14 @@
 const express = require('express');
 const app = express();
-const cors = require('cors'); // Adicionei o middleware de cors
+const cors = require('cors');
 
-app.use(cors());
+// Configurar o CORS
+const corsOptions = {
+  origin: 'https://apirecados.onrender.com', // Altere para o domínio correto do frontend
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos HTTP permitidos
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 const usuarios = [];
