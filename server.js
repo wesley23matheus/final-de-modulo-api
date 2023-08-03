@@ -1,13 +1,14 @@
 const express = require('express');
 const app = express();
+const cors = require('cors'); // Adicionei o middleware de cors
+
 app.use(cors());
+app.use(express.json());
 
 const usuarios = [];
 const recados = [];
 
-app.use(express.json());
-
-// Rota para criar uma nova conta de usuário
+// Rota para criar uma nova conta de usuário (Método POST)
 app.post('/contas', (req, res) => {
   const { nome, email, senha } = req.body;
 
@@ -28,7 +29,7 @@ app.post('/contas', (req, res) => {
   res.status(201).json({ message: 'Conta criada com sucesso' });
 });
 
-// Rota para fazer o login
+// Rota para fazer o login (Método POST)
 app.post('/login', (req, res) => {
   const { email, senha } = req.body;
 
@@ -41,7 +42,7 @@ app.post('/login', (req, res) => {
   res.json({ message: 'Login bem-sucedido' });
 });
 
-// Rota para criar um novo recado
+// Rota para criar um novo recado (Método POST)
 app.post('/recados', (req, res) => {
   const { titulo, descricao, usuarioId } = req.body;
 
@@ -56,7 +57,7 @@ app.post('/recados', (req, res) => {
   res.status(201).json({ message: 'Recado criado com sucesso' });
 });
 
-// Rota para obter todos os recados de um usuário
+// Rota para obter todos os recados de um usuário (Método GET)
 app.get('/recados/:usuarioId', (req, res) => {
   const usuarioId = parseInt(req.params.usuarioId);
 
@@ -64,7 +65,7 @@ app.get('/recados/:usuarioId', (req, res) => {
   res.json(recadosDoUsuario);
 });
 
-// Rota para atualizar um recado
+// Rota para atualizar um recado (Método PUT)
 app.put('/recados/:id', (req, res) => {
   const recadoId = parseInt(req.params.id);
   const { titulo, descricao } = req.body;
@@ -81,7 +82,7 @@ app.put('/recados/:id', (req, res) => {
   res.json({ message: 'Recado atualizado com sucesso' });
 });
 
-// Rota para excluir um recado
+// Rota para excluir um recado (Método DELETE)
 app.delete('/recados/:id', (req, res) => {
   const recadoId = parseInt(req.params.id);
 
@@ -96,12 +97,11 @@ app.delete('/recados/:id', (req, res) => {
   res.json({ message: 'Recado excluído com sucesso' });
 });
 
-app.listen(3000, () => {
- 
-  console.log('Deu tudo certo');
-  console.log('Servidor rodando na porta 3000');
-
+// Rota para obter todas as contas de usuário (Método GET)
+app.get('/contas', (req, res) => {
+  res.json(usuarios);
 });
 
-
-
+app.listen(3000, () => {
+  console.log('Servidor rodando na porta 3000');
+});
