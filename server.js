@@ -1,18 +1,26 @@
-const express = require('express');
-const app = express();
+const express = require ('express');
 const cors = require('cors');
 
+const app = express();
 // Configurar o CORS
 const corsOptions = {
-  origin: 'https://apirecados.onrender.com', // Altere para o domínio correto do frontend
+  origin: 'https://apirecados.onrender.com', // Altere para o domínio
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos HTTP permitidos
 };
-
-app.use(cors(corsOptions));
 app.use(express.json());
+app.use(cors(corsOptions));
 
-const usuarios = [];
-const recados = [];
+const usuarios = [
+  { id: 1, nome: 'Usuário 1', email: 'usuario1@example.com', senha: 'senha123' },
+  { id: 2, nome: 'Usuário 2', email: 'usuario2@example.com', senha: 'senha456' },
+];
+const recados = [ 
+{ id: 1, mensagem: 'Recado 1' },
+{ id: 2, mensagem: 'Recado 2' },
+{ id: 3, mensagem: 'Recado 3' },
+{ id: 2, mensagem: 'Recado 2' },
+{ id: 3, mensagem: 'Recado 3' },
+];
 
 // Rota para criar uma nova conta de usuário (Método POST)
 app.post('/contas', (req, res) => {
