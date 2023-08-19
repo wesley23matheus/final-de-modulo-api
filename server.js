@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(cors(corsOptions));
 
 const usuarios = [
-  { id: 1, nome: 'wesley', email: 'wesleynui40@gmail.com', senha: '123' },
+  { id: 1, email: 'wesleynui40@gmail.com', senha: '123' },
   
 ];
 const recados = [ 
