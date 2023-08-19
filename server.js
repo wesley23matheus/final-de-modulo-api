@@ -15,11 +15,11 @@ const usuarios = [
   
 ];
 const recados = [ 
-{ id: 1, mensagem: 'Recado 1' },
-{ id: 2, mensagem: 'Recado 2' },
-{ id: 3, mensagem: 'Recado 3' },
-{ id: 2, mensagem: 'Recado 2' },
-{ id: 3, mensagem: 'Recado 3' },
+{ titulo: 'Recado 1', descricao: 'ola', usuarioId:1 },
+{ titulo: 'Recado 2', descricao: 'ola',usuarioId:2 },
+{ titulo: 'Recado 3', descricao: 'ola', usuarioId:3},
+{ titulo: 'Recado 2', descricao: 'ola', usuarioId:4},
+{ titulo: 'Recado 3', descricao: 'ola',  usuarioId:5 },
 ];
 
 // Rota para criar uma nova conta de usuário (Método POST)
