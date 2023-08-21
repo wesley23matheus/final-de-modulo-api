@@ -1,25 +1,27 @@
-const express = require ('express');
+const express = require('express');
 const cors = require('cors');
 
 const app = express();
+
 // Configurar o CORS
 const corsOptions = {
-  origin: 'https://apirecados.onrender.com', // Altere para o domínio
+  origin: 'https://seu-site.com', // Altere para o domínio do seu site
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos HTTP permitidos
 };
 app.use(express.json());
 app.use(cors(corsOptions));
 
+// Dados de exemplo
 const usuarios = [
   { id: 1, email: 'wesleynui40@gmail.com', senha: '123' },
-  
 ];
-const recados = [ 
-{ titulo: 'Recado 1', descricao: 'ola', usuarioId:1 },
-{ titulo: 'Recado 2', descricao: 'ola',usuarioId:2 },
-{ titulo: 'Recado 3', descricao: 'ola', usuarioId:3},
-{ titulo: 'Recado 2', descricao: 'ola', usuarioId:4},
-{ titulo: 'Recado 3', descricao: 'ola',  usuarioId:5 },
+
+const recados = [
+  { id: 1, titulo: 'Recado 1', descricao: 'Olá, este é o Recado 1', usuarioId: 1 },
+  { id: 2, titulo: 'Recado 2', descricao: 'Olá, este é o Recado 2', usuarioId: 2 },
+  { id: 3, titulo: 'Recado 3', descricao: 'Olá, este é o Recado 3', usuarioId: 1 },
+  { id: 4, titulo: 'Recado 4', descricao: 'Olá, este é o Recado 4', usuarioId: 3 },
+  // Adicione mais recados conforme necessário
 ];
 
 // Rota para criar uma nova conta de usuário (Método POST)
@@ -70,8 +72,27 @@ app.post('/recados', (req, res) => {
   res.status(201).json({ message: 'Recado criado com sucesso' });
 });
 
+// Rota para obter todos os recados (com paginação) (Método GET)
+app.get('/recados', (req, res) => {
+  const itemsPorPagina = 3; // Número de recados por página
+  const pagina = req.query.page || 1;
+
+  const indiceInicial = (pagina - 1) * itemsPorPagina;
+  const indiceFinal = pagina * itemsPorPagina;
+
+  // Lista apenas os recados da página atual
+  const recadosPaginados = recados.slice(indiceInicial, indiceFinal);
+
+  const resposta = {
+    mensagem: 'Recados da Página',
+    numeroDePaginas: Math.ceil(recados.length / itemsPorPagina),
+    recados: recadosPaginados,
+  };
+  res.json(resposta);
+});
+
 // Rota para obter todos os recados de um usuário (Método GET)
-app.get('/recados/:usuarioId', (req, res) => {
+app.get('/recados/usuario/:usuarioId', (req, res) => {
   const usuarioId = parseInt(req.params.usuarioId);
 
   const recadosDoUsuario = recados.filter((recado) => recado.usuarioId === usuarioId);
@@ -115,8 +136,9 @@ app.get('/contas', (req, res) => {
   res.json(usuarios);
 });
 
-app.listen(3000, () => {
-  console.log('Servidor rodando na porta 3000');
+app.listen(4000, () => {
+  console.log('Servidor rodando na porta 4000');
 });
+
 
 
