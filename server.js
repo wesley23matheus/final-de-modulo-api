@@ -5,9 +5,10 @@ const app = express();
 
 // Configurar o CORS
 const corsOptions = {
-  origin: 'https://seu-site.com', // Altere para o domínio do seu site
+  origin: 'https://apirecados.onrender.com', // Altere para o domínio do seu site
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos HTTP permitidos
 };
+
 app.use(express.json());
 app.use(cors(corsOptions));
 
