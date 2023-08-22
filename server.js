@@ -1,33 +1,5 @@
-import express from "express";
-import cors from "cors";
 
-const app = express();
-app.use(express.json());
-app.use(cors());
-
-app.get("/", (req,res) =>{
-  res.send("ola wesley");
-});
-
-app.post("/cadastro");
-
-app.listen(4000, () => console.log("api rodando normalmente"));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*const express = require('express');
+const express = require('express');
 const cors = require('cors');
 
 const app = express();
@@ -49,13 +21,16 @@ const usuarios = [
 const recados = [
   { id: 1, titulo: 'Recado 1', descricao: 'Olá, este é o Recado 1', usuarioId: 1 },
   { id: 2, titulo: 'Recado 2', descricao: 'Olá, este é o Recado 2', usuarioId: 2 },
-  { id: 3, titulo: 'Recado 3', descricao: 'Olá, este é o Recado 3', usuarioId: 1 },
-  { id: 4, titulo: 'Recado 4', descricao: 'Olá, este é o Recado 4', usuarioId: 3 },
-  // Adicione mais recados conforme necessário
+  { id: 3, titulo: 'Recado 3', descricao: 'Olá, este é o Recado 3', usuarioId: 3 },
+  { id: 4, titulo: 'Recado 4', descricao: 'Olá, este é o Recado 4', usuarioId: 4 },
+  { id: 5, titulo: 'Recado 5', descricao: 'Olá, este é o Recado 5', usuarioId: 5 },
+  { id: 6, titulo: 'Recado 6', descricao: 'Olá, este é o Recado 6', usuarioId: 6 },
+  { id: 7, titulo: 'Recado 7', descricao: 'Olá, este é o Recado 7', usuarioId: 7 },
+  { id: 8, titulo: 'Recado 9', descricao: 'Olá, este é o Recado 8', usuarioId: 8 },
 ];
 
 // Rota para criar uma nova conta de usuário (Método POST)
-app.post('/contas', (req, res) => {
+/*app.post('/contas', (req, res) => {
   const { email, senha } = req.body;
 
   const usuarioExistente = usuarios.find((usuario) => usuario.email === email);
@@ -101,17 +76,18 @@ app.post('/recados', (req, res) => {
 
   res.status(201).json({ message: 'Recado criado com sucesso' });
 });
-
+*/
 // Rota para obter todos os recados (com paginação) (Método GET)
 app.get('/recados', (req, res) => {
+  const array = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
   const itemsPorPagina = 3; // Número de recados por página
   const pagina = req.query.page || 1;
 
   const indiceInicial = (pagina - 1) * itemsPorPagina;
-  const indiceFinal = pagina * itemsPorPagina;
+  const indiceFinal = pagina * itemsPorPagina -1;
 
   // Lista apenas os recados da página atual
-  const recadosPaginados = recados.slice(indiceInicial, indiceFinal);
+  const recadosPaginados = recados.slice(indiceInicial, indiceFinal +1);
 
   const resposta = {
     mensagem: 'Recados da Página',
@@ -168,7 +144,7 @@ app.get('/contas', (req, res) => {
 
 app.listen(4000, () => {
   console.log('Servidor rodando na porta 4000');
-});*/
+});
 
 
 
