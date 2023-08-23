@@ -30,8 +30,8 @@ const recados = [
 ];
 
 // Rota para criar uma nova conta de usuário (Método POST)
-/*app.post('/contas', (req, res) => {
-  const { email, senha } = req.body;
+app.post('/contas', (req, res) => {
+  const {nome, email, senha } = req.body;
 
   const usuarioExistente = usuarios.find((usuario) => usuario.email === email);
   if (usuarioExistente) {
@@ -41,6 +41,7 @@ const recados = [
 
   const novoUsuario = {
     id: usuarios.length + 1,
+    nome,
     email,
     senha,
   };
@@ -76,7 +77,7 @@ app.post('/recados', (req, res) => {
 
   res.status(201).json({ message: 'Recado criado com sucesso' });
 });
-*/
+
 // Rota para obter todos os recados (com paginação) (Método GET)
 app.get('/recados', (req, res) => {
   const array = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
