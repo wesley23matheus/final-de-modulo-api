@@ -19,14 +19,14 @@ const usuarios = [
 ];
 
 const recados = [
-  { id: 1, titulo: 'Recado 1', descricao: 'Olá, este é o Recado 1', usuarioId: 1 },
+  /*{ id: 1, titulo: 'Recado 1', descricao: 'Olá, este é o Recado 1', usuarioId: 1 },
   { id: 2, titulo: 'Recado 2', descricao: 'Olá, este é o Recado 2', usuarioId: 2 },
   { id: 3, titulo: 'Recado 3', descricao: 'Olá, este é o Recado 3', usuarioId: 3 },
   { id: 4, titulo: 'Recado 4', descricao: 'Olá, este é o Recado 4', usuarioId: 4 },
   { id: 5, titulo: 'Recado 5', descricao: 'Olá, este é o Recado 5', usuarioId: 5 },
   { id: 6, titulo: 'Recado 6', descricao: 'Olá, este é o Recado 6', usuarioId: 6 },
   { id: 7, titulo: 'Recado 7', descricao: 'Olá, este é o Recado 7', usuarioId: 7 },
-  { id: 8, titulo: 'Recado 9', descricao: 'Olá, este é o Recado 8', usuarioId: 8 },
+  { id: 8, titulo: 'Recado 9', descricao: 'Olá, este é o Recado 8', usuarioId: 8 },*/
 ];
 
 // Rota para criar uma nova conta de usuário (Método POST)
