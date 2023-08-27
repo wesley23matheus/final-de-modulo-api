@@ -64,7 +64,7 @@ app.post('/login', (req, res) => {
 });
 
 // Rota para criar um novo recado (Método POST)
-app.post('/recados', (req, res) => {
+/*app.post('/recados', (req, res) => {
   const { titulo, descricao, usuarioId } = req.body;
 
   const recado = {
@@ -136,9 +136,43 @@ app.delete('/recados/:id', (req, res) => {
   recados.splice(recadoIndex, 1);
 
   res.json({ message: 'Recado excluído com sucesso' });
+});*/
+//Create - POST
+app.post("/recados", (request, response) => {
+  const recado = request.body;
+
+  const novoRecado = {
+    id: (ultimoId += 1),
+    titulo: recado.titulo,
+    descricao: recado.descricao,
+  };
+
+  recados.push(novoRecado);
+
+  return response.status(200).json("Recado criado com sucesso");
 });
 
-// Rota para obter todas as contas de usuário (Método GET)
+//List - GET
+app.get("/recados", (request, response) => {
+  return response.status(200).json(recados);
+});
+
+// Delete
+app.delete("/recados/:idRecado", (request, response) => {
+  const recadoId = Number(request.params.idRecado);
+
+  const indiceRecado = recados.findIndex((recado) => recado.id === recadoId);
+
+  if (indiceRecado === -1) {
+    return response.status(404).json("Recado não encontrado.");
+  }
+
+  recados.splice(indiceRecado, 1);
+
+  return response.status(200).json("Recado excluído com sucesso.");
+});
+
+// Rota para obter todas as contas de usuário (Método GET) foi aqui
 app.get('/contas', (req, res) => {
   res.json(usuarios);
 });
