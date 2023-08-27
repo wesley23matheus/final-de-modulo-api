@@ -1,16 +1,88 @@
+import express from "express";
+import cors from "cors";
+import bcrypt from "bcrypt";
 
-const express = require('express');
+const app = express();
+app.use(cors());
+app.use(express.json());
+app.get("/", (request, response) => {
+  return response.json("OK");
+});
+
+app.listen(4000, () => {
+  console.log('Servidor rodando na porta 4000');
+});
+
+let recados = [];
+let ultimoId = 0;
+let usuarios = [
+  { acesso: "marcelo", nome: "Marcelo Eltz", senha: "123123" },
+  { acesso: "andrea", nome: "Andrea Noer", senha: "123456" },
+];
+
+//Login - POST
+app.post("/login", (request, response) => {
+  const dados = request.body;
+
+  const usuarioLogado = usuarios.find(
+    (item) => item.acesso === dados.acesso && item.senha === dados.senha
+  );
+
+  if (usuarioLogado) {
+    return response
+      .status(200)
+      .json({ msg: "Usuário autenticado", usuario: usuarioLogado });
+  }
+
+  return response.status(401).json("Usuário sem acesso");
+});
+
+//Create - POST
+app.post("/recados", (request, response) => {
+  const recado = request.body;
+
+  const novoRecado = {
+    id: (ultimoId += 1),
+    titulo: recado.titulo,
+    descricao: recado.descricao,
+  };
+
+  recados.push(novoRecado);
+
+  return response.status(200).json("Recado criado com sucesso");
+});
+
+//List - GET
+app.get("/recados", (request, response) => {
+  return response.status(200).json(recados);
+});
+
+// Delete
+app.delete("/recados/:idRecado", (request, response) => {
+  const recadoId = Number(request.params.idRecado);
+
+  const indiceRecado = recados.findIndex((recado) => recado.id === recadoId);
+
+  if (indiceRecado === -1) {
+    return response.status(404).json("Recado não encontrado.");
+  }
+
+  recados.splice(indiceRecado, 1);
+
+  return response.status(200).json("Recado excluído com sucesso.");
+});
+/*const express = require('express');
 const cors = require('cors');
 
 const app = express();
 
-/*// Configurar o CORS
+/* Configurar o CORS
 const corsOptions = {
   origin: 'https://apirecados.onrender.com', // Altere para o domínio do seu site
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos HTTP permitidos
 };
 */
-app.use(express.json());
+/*app.use(express.json());
 app.use(cors());
 
 // Dados de exemplo
@@ -26,7 +98,7 @@ const recados = [
   { id: 5, titulo: 'Recado 5', descricao: 'Olá, este é o Recado 5', usuarioId: 5 },
   { id: 6, titulo: 'Recado 6', descricao: 'Olá, este é o Recado 6', usuarioId: 6 },
   { id: 7, titulo: 'Recado 7', descricao: 'Olá, este é o Recado 7', usuarioId: 7 },
-  { id: 8, titulo: 'Recado 9', descricao: 'Olá, este é o Recado 8', usuarioId: 8 },*/
+  { id: 8, titulo: 'Recado 9', descricao: 'Olá, este é o Recado 8', usuarioId: 8 },
 ];
 
 // Rota para criar uma nova conta de usuário (Método POST)
@@ -61,7 +133,7 @@ app.post('/login', (req, res) => {
   }
 
   res.json({ message: 'Login bem-sucedido' });
-});
+});*/
 
 // Rota para criar um novo recado (Método POST)
 /*app.post('/recados', (req, res) => {
@@ -138,7 +210,7 @@ app.delete('/recados/:id', (req, res) => {
   res.json({ message: 'Recado excluído com sucesso' });
 });*/
 //Create - POST
-app.post("/recados", (request, response) => {
+/*app.post("/recados", (request, response) => {
   const recado = request.body;
 
   const novoRecado = {
@@ -179,7 +251,7 @@ app.get('/contas', (req, res) => {
 
 app.listen(4000, () => {
   console.log('Servidor rodando na porta 4000');
-});
+});*/
 
 
 
