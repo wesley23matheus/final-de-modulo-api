@@ -13,7 +13,16 @@ app.listen(4000, () => {
   console.log('Servidor rodando na porta 4000');
 });
 
-let recados = [];
+let recados = [
+{ id: 2, titulo: 'Recado 2', descricao: 'Olá, este é o Recado 2', },
+{ id: 3, titulo: 'Recado 3', descricao: 'Olá, este é o Recado 3', },
+{ id: 4, titulo: 'Recado 4', descricao: 'Olá, este é o Recado 4', },
+{ id: 5, titulo: 'Recado 5', descricao: 'Olá, este é o Recado 5', },
+{ id: 6, titulo: 'Recado 6', descricao: 'Olá, este é o Recado 6', },
+{ id: 7, titulo: 'Recado 7', descricao: 'Olá, este é o Recado 7', },
+{ id: 8, titulo: 'Recado 9', descricao: 'Olá, este é o Recado 8', },
+];
+
 let ultimoId = 0;
 let usuarios = [
   { acesso: "marcelo", nome: "Marcelo Eltz", senha: "123123" },
